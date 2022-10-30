@@ -6,6 +6,47 @@ export const START = () => {
     }
 }
 
+export const FETCH_ACCOUNTS = () => {
+  return function(dispatch){
+    dispatch(FETCH_USERS_REQUEST());
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => res.json())
+    .then(data => {
+      dispatch(FETCH_USERS_SUCCESS(data))
+    })
+    .catch(err => {
+      dispatch(FETCH_USERS_ERROR(err))
+    })
+  }
+}
+
+export const FETCH_USERS_ERROR = (err) => {
+  return {
+    type: actionTypes.FETCH_USERS_ERROR,
+    payload: {
+      err : err
+    }
+    
+  }
+}
+
+export const FETCH_USERS_REQUEST = () => {
+  return {
+    type: actionTypes.FETCH_USERS_REQUEST
+  }
+}
+
+export const FETCH_USERS_SUCCESS = (accounts) => {
+  return {
+    type: actionTypes.FETCH_USERS_SUCCESS,
+    payload: {
+      accounts: accounts
+    }
+  }
+}
+
+
+
 export const DISPLAY_ACCOUNTS_ACTION = () => {
     return{
         type: actionTypes.DISPLAY_ACCOUNTS_ACTION

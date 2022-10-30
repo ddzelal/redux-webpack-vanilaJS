@@ -3,6 +3,7 @@ import logger from "redux-logger";
 import { applyMiddleware } from "redux";
 import initialState from "./initialState";
 import { rootReducer } from "./rootReducer";
+import thunkMiddleware from "redux-thunk";
 
 
 // const myFunc = function(store){
@@ -16,6 +17,6 @@ import { rootReducer } from "./rootReducer";
 //     }
 // }
 
-const store = createStore(rootReducer, initialState , applyMiddleware(logger));
+const store = createStore(rootReducer, initialState , applyMiddleware(logger,thunkMiddleware));
 
 export default store;

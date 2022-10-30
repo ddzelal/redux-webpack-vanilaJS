@@ -10,6 +10,7 @@ let saveBtn = document.querySelector("#saveBtn");
 let editBtn = document.querySelector("#editBtn");
 
 window.addEventListener("load", () => {
+  store.dispatch(action_creators.FETCH_ACCOUNTS())
   store.dispatch(action_creators.START());
 });
 

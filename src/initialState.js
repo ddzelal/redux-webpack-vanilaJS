@@ -13,14 +13,9 @@ export const initialState = {
 
 
 export const accountsState = {
-    accounts: [
-        {
-            id:1,
-            name: "Dzelal",
-            phone: "4249024",
-            email: "dzelal@gmail.com"
-        }
-    ],
+    loading: false,
+    accounts: [],
+    error : ""
 }
 
 

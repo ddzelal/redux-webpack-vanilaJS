@@ -23,24 +23,27 @@ store.subscribe(function () {
 //   store.dispatch(action_creators(userId));
 // }
 
-function editAccount(userId) {
-  const accToEdit = store.getState().accounts.find((el) => el.id === userId);
-  console.log(accToEdit);
-  document.querySelector("#saveBtn").style.display = "none";
-  document.querySelector("#editBtn").style.display = "block";
+// function editAccount(userId) {
+//   console.log(store.getState,"dwadwa")
+//   const accToEdit = store.getState().accounts.find((el) => el.id === userId);
+//   console.log(accToEdit);
+//   document.querySelector("#saveBtn").style.display = "none";
+//   document.querySelector("#editBtn").style.display = "block";
 
-  let accName = document.querySelector("#account_name");
-  let accPhone = document.querySelector("#account_phone");
-  let accEmail = document.querySelector("#account_email");
-  let accId = document.querySelector("#accId");
+//   let accName = document.querySelector("#account_name");
+//   let accPhone = document.querySelector("#account_phone");
+//   let accEmail = document.querySelector("#account_email");
+//   let accId = document.querySelector("#accId");
 
-  accName.value = accToEdit.name;
-  accPhone.value = accToEdit.phone;
-  accEmail.value = accToEdit.email;
-  accId.value = accToEdit.id;
+//   accName.value = accToEdit.name;
+//   accPhone.value = accToEdit.phone;
+//   accEmail.value = accToEdit.email;
+//   accId.value = accToEdit.id;
 
-  store.dispatch(action_creators.DISPLAY_ADD_ACCOUNT_ACTION());
-}
+//   store.dispatch(action_creators.DISPLAY_ADD_ACCOUNT_ACTION());
+// }
+
+
 
 accountsBtn.addEventListener("click", () => {
   store.dispatch(action_creators.DISPLAY_ACCOUNTS_ACTION());
@@ -123,7 +126,7 @@ function displayAccountsTable() {
         <td>${account.phone}</td>
         <td>${account.email}</td>
         <td>
-        <button onclick="editAccount(${account.id})"  class="btn btn-warning delete">Edit</button>
+        <button  data-id="${account.id}"  class="btn btn-warning edit">Edit</button>
           <button id="deleteButton"  data-id="${account.id}" class="btn btn-danger delete">Delete</button>
         </td>
         </tr>
@@ -132,14 +135,44 @@ function displayAccountsTable() {
 
   tbody.innerHTML = text;
   let allDeleteBtns = document.querySelectorAll(".delete");
+  let allEditBtns = document.querySelectorAll('.edit')
+
+  console.log(allEditBtns)
 
   for (let i = 0; i < allDeleteBtns.length; i++) {
     const btn = allDeleteBtns[i];
     btn.addEventListener("click", deleteAccount);
   }
+
+  for (let i = 0; i < allEditBtns.length; i++) {
+    const btnEdit = allEditBtns[i];
+    btnEdit.addEventListener("click", editAccount);
+  }
+
 }
 
 function deleteAccount() {
   let id = this.getAttribute("data-id");
   store.dispatch(action_creators.DELETE_ACCOUNT_ACTION(id));
+}
+
+
+function editAccount(){
+  let id = this.getAttribute('data-id');
+  const accToEdit = store.getState().accountsData.accounts.find((el) => el.id === Number(id));
+ 
+  document.querySelector("#saveBtn").style.display = "none";
+  document.querySelector("#editBtn").style.display = "block";
+
+  let accName = document.querySelector("#account_name");
+  let accPhone = document.querySelector("#account_phone");
+  let accEmail = document.querySelector("#account_email");
+  let accId = document.querySelector("#accId");
+
+  accName.value = accToEdit.name;
+  accPhone.value = accToEdit.phone;
+  accEmail.value = accToEdit.email;
+  accId.value = accToEdit.id;
+
+  store.dispatch(action_creators.UPDATE_ACCOUNT(id))
 }

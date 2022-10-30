@@ -39,8 +39,9 @@ export const DELETE_ACCOUNT_ACTION = (uId) => {
   };
 
 export const UPDATE_ACCOUNT = (account) => {
+    console.log(account,"cao")
     return {
-      type: actionsConstants.UPDATE_ACCOUNT,
+      type: actionTypes.UPDATE_ACCOUNT,
       payload: {
         editedAccount: account,
       },

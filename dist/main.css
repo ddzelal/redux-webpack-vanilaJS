@@ -1,3 +1,7 @@
 #addAccountView {
     display: block;
 }
+
+#editAccountView {
+    display: none;
+}

@@ -77,6 +77,42 @@
           </div>
         </div>
       </div>
+      <div id="editAccountView" class="row">
+        <div class="col-10 offset-1">
+          <h3>Edit Account</h3>
+          <div class="row">
+            <div class="col-10 offset-1">
+              <input type="hidden" id="accId" name="accId" value="" />
+              <input
+                id="edit_account_name"
+                type="text"
+                placeholder="name"
+                class="form-control"
+              /><br />
+              <input
+                id="edit_account_phone"
+                type="text"
+                placeholder="phone"
+                class="form-control"
+              /><br />
+              <input
+                id="edit_account_email"
+                type="email"
+                placeholder="email"
+                class="form-control"
+              /><br />
+              <button id="edit_saveBtn" class="btn btn-primary">Save</button>
+              <button
+                id="editBtn"
+                class="btn btn-warning"
+                style="display: none"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>

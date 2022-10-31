@@ -8,6 +8,8 @@ let accountsView = document.querySelector("#accountsView");
 let addAccountsView = document.querySelector("#addAccountView");
 let saveBtn = document.querySelector("#saveBtn");
 let editBtn = document.querySelector("#editBtn");
+let editAccountView = document.querySelector('#editAccountView')
+
 
 window.addEventListener("load", () => {
   store.dispatch(action_creators.FETCH_ACCOUNTS())
@@ -63,6 +65,7 @@ addAccountsBtn.addEventListener("click", () => {
 });
 
 saveBtn.addEventListener("click", () => {
+  console.log('SAVEEEEEEEEEEEEEEEE')
   let accName = document.querySelector("#account_name");
   let accPhone = document.querySelector("#account_phone");
   let accEmail = document.querySelector("#account_email");
@@ -138,7 +141,6 @@ function displayAccountsTable() {
   let allDeleteBtns = document.querySelectorAll(".delete");
   let allEditBtns = document.querySelectorAll('.edit')
 
-  console.log(allEditBtns)
 
   for (let i = 0; i < allDeleteBtns.length; i++) {
     const btn = allDeleteBtns[i];
@@ -159,16 +161,25 @@ function deleteAccount() {
 
 
 function editAccount(){
+  console.log('tu sam!!!')
   let id = this.getAttribute('data-id');
   const accToEdit = store.getState().accountsData.accounts.find((el) => el.id === Number(id));
+
+  editAccountView.style.display = "block"
+
+
+  
  
   document.querySelector("#saveBtn").style.display = "none";
   document.querySelector("#editBtn").style.display = "block";
 
-  let accName = document.querySelector("#account_name");
-  let accPhone = document.querySelector("#account_phone");
-  let accEmail = document.querySelector("#account_email");
+  let accName = document.querySelector("#edit_account_name");
+  let accPhone = document.querySelector("#edit_account_phone");
+  let accEmail = document.querySelector("#edit_account_email");
   let accId = document.querySelector("#accId");
+
+
+  console.log(accName,accToEdit)
 
   accName.value = accToEdit.name;
   accPhone.value = accToEdit.phone;

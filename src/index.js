@@ -9,6 +9,8 @@ let addAccountsView = document.querySelector("#addAccountView");
 let saveBtn = document.querySelector("#saveBtn");
 let editBtn = document.querySelector("#editBtn");
 let editAccountView = document.querySelector('#editAccountView')
+let edit_saveBtn = document.querySelector('#edit_saveBtn')
+let accountsViewEdit = document.querySelector('.accountsView')
 
 
 window.addEventListener("load", () => {
@@ -60,12 +62,12 @@ addAccountsBtn.addEventListener("click", () => {
 
   document.querySelector("#saveBtn").style.display = "block";
   document.querySelector("#editBtn").style.display = "none";
+  editAccountView.style.display = "none"
 
   store.dispatch(action_creators.DISPLAY_ADD_ACCOUNT_ACTION());
 });
 
 saveBtn.addEventListener("click", () => {
-  console.log('SAVEEEEEEEEEEEEEEEE')
   let accName = document.querySelector("#account_name");
   let accPhone = document.querySelector("#account_phone");
   let accEmail = document.querySelector("#account_email");
@@ -160,18 +162,20 @@ function deleteAccount() {
 }
 
 
+
+
 function editAccount(){
   console.log('tu sam!!!')
   let id = this.getAttribute('data-id');
   const accToEdit = store.getState().accountsData.accounts.find((el) => el.id === Number(id));
 
   editAccountView.style.display = "block"
+  accountsViewEdit.style.display = "none"
 
 
   
  
-  document.querySelector("#saveBtn").style.display = "none";
-  document.querySelector("#editBtn").style.display = "block";
+ 
 
   let accName = document.querySelector("#edit_account_name");
   let accPhone = document.querySelector("#edit_account_phone");
@@ -179,12 +183,37 @@ function editAccount(){
   let accId = document.querySelector("#accId");
 
 
-  console.log(accName,accToEdit)
+ 
 
   accName.value = accToEdit.name;
   accPhone.value = accToEdit.phone;
   accEmail.value = accToEdit.email;
   accId.value = accToEdit.id;
 
-  store.dispatch(action_creators.UPDATE_ACCOUNT(id))
+
+
+  
+
 }
+
+
+edit_saveBtn.addEventListener('click',()=> {
+
+  let accName = document.querySelector("#edit_account_name");
+  let accPhone = document.querySelector("#edit_account_phone");
+  let accEmail = document.querySelector("#edit_account_email");
+  let accId = document.querySelector("#accId");
+
+
+
+  const acc = {
+    name: accName.value,
+    phone:accPhone.value,
+    email:accEmail.value,
+    id: accId.value
+  }
+
+  store.dispatch(action_creators.UPDATE_ACCOUNT(acc))
+  editAccountView.style.display = "none"
+
+  })

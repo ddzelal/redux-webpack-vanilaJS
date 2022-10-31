@@ -29,7 +29,8 @@ function accountsReducer(state = accountsState, action) {
       return {
         ...state,
         accounts: state.accounts.map((acc) => {
-          if (acc.id === action.payload.editedAccount.id) {
+          if (acc.id === Number(action.payload.editedAccount.id)) {
+            debugger
             return action.payload.editedAccount;
           }
           return acc;
